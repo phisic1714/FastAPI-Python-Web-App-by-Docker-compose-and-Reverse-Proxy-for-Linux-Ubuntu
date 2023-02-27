@@ -1,13 +1,36 @@
+version: '3.3'
 services:
   api:
-    build:
-      context: .
-      target: dev-envs
-    container_name: fastapi-application
+    image: spcn27fastapi:latest		#ใช้ tag ของ image ที่เราตั้งตอน Build
+    networks:
+     - traefik-public
     environment:
-      PORT: 8000
-    ports:
-      - '8000:8000'
+     PORT: 8000
+    logging:
+      driver: json-file
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    restart: "no"
+      - app:/app
+    restart: 'no'
+    deploy:
+      replicas: 3
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.peer-http.entrypoints: http
+        traefik.http.routers.peer-http.rule: Host(`peerapat.xops.ipv9.xyz`)
+        traefik.http.services.peer.loadbalancer.server.port: '8000'
+      resources:
+        reservations:
+          cpus: '0.1'
+          memory: 10M
+        limits:
+          cpus: '0.4'
+          memory: 250M
+          
+networks:
+  traefik-public:
+    external: true
+volumes:
+  app:
