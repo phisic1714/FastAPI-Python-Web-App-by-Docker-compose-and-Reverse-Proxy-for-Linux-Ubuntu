@@ -1,9 +1,9 @@
 version: '3.3'
 services:
   api:
-    image: spcn27fastapi:latest		#ใช้ tag ของ image ที่เราตั้งตอน Build
+    image: phisic1714/fastapi:latest		#ใช้ tag ของ image ที่เราตั้งตอน Build
     networks:
-     - traefik-public
+     - webproxy
     environment:
      PORT: 8000
     logging:
@@ -13,14 +13,13 @@ services:
       - app:/app
     restart: 'no'
     deploy:
-      replicas: 3
+      replicas: 1
       labels:
-        traefik.constraint-label: traefik-public
-        traefik.docker.network: traefik-public
-        traefik.enable: 'true'
-        traefik.http.routers.peer-http.entrypoints: http
-        traefik.http.routers.peer-http.rule: Host(`peerapat.xops.ipv9.xyz`)
-        traefik.http.services.peer.loadbalancer.server.port: '8000'
+        - traefik.docker.network=webproxy
+        - traefik.enable=true
+        - traefik.http.routers.${APPNAME}-https.entrypoints=websecure
+        - traefik.http.routers.${APPNAME}-https.rule=Host("${APPNAME}.xops.ipv9.me")
+        - traefik.http.services.${APPNAME}.loadbalancer.server.port=8000
       resources:
         reservations:
           cpus: '0.1'
@@ -30,7 +29,7 @@ services:
           memory: 250M
           
 networks:
-  traefik-public:
+ webproxy:
     external: true
 volumes:
   app:
