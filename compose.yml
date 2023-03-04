@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   api:
-    image: phisic1714/fastapi:latest		#ใช้ tag ของ image ที่เราตั้งตอน Build
+    image: phisic1714/fastapi:latest		
     networks:
      - webproxy
     environment:
