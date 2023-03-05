@@ -6,7 +6,7 @@ Hi, My name is Peerapat. I'll will show you how to compose *FastAPI python web a
 | :-: |
 | [Preparation (การเตรียมพร้อม)](#preparation) |
 |[Step 1 : Python file (ขั้นตอนที่ 1 : ไฟล์ Python)](#step-1--python-file)|
-|[Step 2 : Dockerfile (ขั้นตอนที่ 2 : Dockerfile)](#step-2--dockerfile)|
+|[Step 2 : Dockerfile (ขั้นตอนที่ 2 : Dockerfile)](#step-2--Dockerfile)|
 |[Step 3 : compose.yml file (ขั้นตอนที่ 3 : ไฟล์ compose.yml)](#step-3--composeyml-file)|
 |[Result (ผลลัพธ์)](#result)|
 |[Reference (อ้างอิง)](#reference)|
