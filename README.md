@@ -32,6 +32,10 @@ Hi, My name is Peerapat. I'll will show you how to compose *FastAPI python web a
 (สร้าง Network ชื่อ Webproxy จากคำสั่งนี้)
 
           docker network create -d overlay --attachable webproxy
+
+6. [Register Dockerhub](https://hub.docker.com/) 
+   
+   (สมัคร Dockerhub)
 ## Step 1 : Python file 
 (ขั้นตอนที่ 1 : ไฟล์ Python) [top⬆️](#fastapi-python-web-app-by-docker-compose-and-reverse-proxy-for-linux-ubuntu-fastapi-python-web-app-โดย-docker-compose-และ-reverse-proxy-สำหรับ-linux-ubuntu)
 
@@ -71,9 +75,9 @@ File Path
 (ขั้นตอนที่ 2 : Dockerfile) [top⬆️](#fastapi-python-web-app-by-docker-compose-and-reverse-proxy-for-linux-ubuntu-fastapi-python-web-app-โดย-docker-compose-และ-reverse-proxy-สำหรับ-linux-ubuntu)
 
 ---
-Create Dockerfile file to set command scripts to create image. 
+Create Dockerfile  to set command scripts to create image and Push image to Dockerhub for allow image to Pull on anothor compose file whithout build image from Dockerfile again.
 
-(สร้าง Dockerfile เพื่อตั้งเป็นคำสั่งในการสร้าง image)
+(สร้าง Dockerfile เพื่อตั้งเป็นคำสั่งในการสร้าง image และ Push image ไปยัง Dockerhub เพื่อให้ image Pull บน compose file อื่นๆได้โดยไม่ต้อง สร้าง image จาก Dockerfile ใหม่)
 
 1.  Create Dockerfile you can use from this repository or Create by your own. 
 
@@ -141,6 +145,65 @@ Create Dockerfile file to set command scripts to create image.
          (ใช้ Extendsion ของ Docker engine บน VS Code)
 
          ![f](img/build.png)
+
+4.  Create Dockerhub repository 
+
+
+    (สร้าง Dockerhub repository)
+    
+    - Select Create repository
+     
+      (เลือกสร้าง repository)
+    - Entry repository name 
+    
+      (กรอกชื่อ repository)
+![f](img/entryrepo.png)
+    - Now you'll have a  repository and tag for push image 
+     
+      (ตอนนี้คุณมี repository และ tag สำหรับ push image แล้ว)
+      ![f](img/tag.png)
+5.  Push image to Dockerhub
+   
+    (สร้าง Dockerhub repository)
+
+   
+     - Set registry on Portainer select Dockerhub 
+     
+       (ตั้ง registry บน Portainer เลือก Dockerhub)
+      
+
+     - In image menu select image you build before
+      
+       (ในเมนู image ให้เลือก image ที่คุณเพิ่งสร้างก่อนหน้านี้)
+
+        ![f](img/selectimage.png)
+     - Entry your repository tag and press tag button
+    
+        (กรอก repository tag ของคุณ และกดปุ่ม tag) 
+
+        ![f](img/entrytag.png)
+     - You'll see an image tag appear on image tag section you can press push button to push image to Docker hub
+  
+        (คุณจะเห็น image tag แสดงในช่อง image tag คุณสามารถกดปุ่ม push เพื่อ push image ได้) 
+
+        ![f](img/push.png)
+
+6. Pull image from Dockerhub. I'll will show on my [Professor Portainer](http://portainer.ipv9.me/) how to pull it 
+   
+   (Pull image จาก Dockerhub โดยผมจะแสดงผ่าน Portainer อาจารย์ของผมเพื่อแสดงการ Pull)
+   
+     - Go to image menu you'll see an tag the image section you can entry your repository tag on this section and pull it.
+
+        (ไปที่หน้าเมนู image คุณจะเห็นช่อง tag the image คุณสามารถกรอก repository tag ของคุณบนช่องนี้และ pull ได้เลย) 
+
+        ![f](img/search.png)
+     
+ At Result it'll show image and repository tag.Now you can use them on composefile.
+      
+(ผลลัพธ์ที่ได้จะมี image และ tag ตาม repository เพิ่มเข้ามาคุณสามารถนำไปใช้ใน composefile ได้เลย)
+
+![f](img/pushresult.png)
+
 
 
 ## Step 3 : compose.yml file 
